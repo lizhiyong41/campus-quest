@@ -7,7 +7,6 @@ import Cropper from 'react-easy-crop'
 import { getCroppedImg } from './cropUtils'
 import toast, { Toaster } from 'react-hot-toast';
 import { compressImage } from './compress'; // 🔥 引入压缩工具
-import { useState, useEffect } from 'react'; // 必须要有 useState
 
 // --- 工具函数 ---
 const timeAgo = (dateString) => {
