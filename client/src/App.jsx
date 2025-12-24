@@ -185,10 +185,10 @@ const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认�
         if (!session) return;
         
         // 1. 获取个人资料
-        axios.get(`http://192.168.54.183:3000/api/profile?email=${session.user.email}`).then(res => setProfile(res.data))
+        axios.get(`https://campus-quest-api.onrender.com/api/profile?email=${session.user.email}`).then(res => setProfile(res.data))
 
         // 2. 获取任务列表 (带筛选)
-        let url = `http://192.168.54.183:3000/api/quests?q=${searchTerm}`;
+        let url = `https://campus-quest-api.onrender.com/api/quests?q=${searchTerm}`;
         if (filterCategory !== '全部') url += `&category=${filterCategory}`;
         if (filterLocation !== '全校') url += `&location=${filterLocation}`;
         if (filterType !== '全部') url += `&type=${filterType}`;
@@ -199,7 +199,7 @@ const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认�
         }).catch(err => console.error(err));
 
         // 3. 获取“我参与的”任务
-        axios.get(`http://192.168.54.183:3000/api/my-quests?email=${session.user.email}`).then(res => {
+        axios.get(`https://campus-quest-api.onrender.com/api/my-quests?email=${session.user.email}`).then(res => {
     setMyQuests(res.data);
     // 🔥 智能初始化：默认展开那些“交易中”或“待确认”的任务
     const defaultOpenIds = res.data
@@ -209,10 +209,10 @@ const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认�
 })
         
         // 4. 获取排行榜
-        axios.get('http://192.168.54.183:3000/api/leaderboard').then(res => setLeaderboard(res.data))
+        axios.get('https://campus-quest-api.onrender.com/api/leaderboard').then(res => setLeaderboard(res.data))
 
         // 5. 获取我的收藏列表
-        axios.get(`http://192.168.54.183:3000/api/favorites/${session.user.email}`)
+        axios.get(`https://campus-quest-api.onrender.com/api/favorites/${session.user.email}`)
              .then(res => setFavoriteIds(res.data))
              .catch(err => console.error("获取收藏失败:", err));
     }
@@ -234,7 +234,7 @@ const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认�
             setFavoriteIds(prev => [...prev, questId]);
         }
         try {
-            await axios.post('http://192.168.54.183:3000/api/favorites/toggle', {
+            await axios.post('https://campus-quest-api.onrender.com/api/favorites/toggle', {
                 user_email: session.user.email,
                 quest_id: questId
             });
@@ -321,7 +321,7 @@ const handleImageUpload = async (e) => {
             const { data } = supabase.storage.from('quest-images').getPublicUrl(filePath);
             const newAvatarUrl = data.publicUrl;
 
-            await axios.put('http://192.168.54.183:3000/api/profile', {
+            await axios.put('https://campus-quest-api.onrender.com/api/profile', {
                 email: session.user.email,
                 avatar_url: newAvatarUrl
             });
@@ -339,7 +339,7 @@ const handleImageUpload = async (e) => {
     // 提交发布
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://192.168.54.183:3000/api/quests', { ...form, email: session.user.email })
+        axios.post('https://campus-quest-api.onrender.com/api/quests', { ...form, email: session.user.email })
           .then(() => { 
               alert('发布成功！'); 
               setFilterType('全部'); setFilterLocation('全校'); setFilterCategory('全部'); setSearchTerm(''); setSortOrder('newest');
@@ -352,7 +352,7 @@ const handleImageUpload = async (e) => {
     // 修改昵称
     const handleUpdateName = () => {
         if (!newName.trim()) return alert("名字不能为空！");
-        axios.put('http://192.168.54.183:3000/api/profile', { email: session.user.email, nickname: newName })
+        axios.put('https://campus-quest-api.onrender.com/api/profile', { email: session.user.email, nickname: newName })
         .then(res => {
             setProfile(res.data);
             setIsEditingName(false);
@@ -362,12 +362,12 @@ const handleImageUpload = async (e) => {
     }
 
     // 任务操作
-    const handleIWant = (id) => { if(confirm('💬 想要这个委托？\n确定后将为您预订并开启私聊。')) axios.post(`http://192.168.54.183:3000/api/quests/${id}/accept`, {email:session.user.email}).then(()=>{ alert('✅ 已预订！'); loadAllData() }) }
-    const handleCancel = (id) => { if(confirm('确定取消/删除该任务吗？')) axios.delete(`http://192.168.54.183:3000/api/quests/${id}`, {data:{email:session.user.email}}).then(()=>{alert('已删除');loadAllData()}) }
-    const handleDrop = (id) => { if(confirm('确定放弃吗？')) axios.post(`http://192.168.54.183:3000/api/quests/${id}/drop`, {email:session.user.email}).then(()=>{alert('已放弃');loadAllData()}) }
+    const handleIWant = (id) => { if(confirm('💬 想要这个委托？\n确定后将为您预订并开启私聊。')) axios.post(`https://campus-quest-api.onrender.com/api/quests/${id}/accept`, {email:session.user.email}).then(()=>{ alert('✅ 已预订！'); loadAllData() }) }
+    const handleCancel = (id) => { if(confirm('确定取消/删除该任务吗？')) axios.delete(`https://campus-quest-api.onrender.com/api/quests/${id}`, {data:{email:session.user.email}}).then(()=>{alert('已删除');loadAllData()}) }
+    const handleDrop = (id) => { if(confirm('确定放弃吗？')) axios.post(`https://campus-quest-api.onrender.com/api/quests/${id}/drop`, {email:session.user.email}).then(()=>{alert('已放弃');loadAllData()}) }
     const updateStatus = (id, action, providerEmail) => {
-        if(action==='complete') { if(!confirm('确认任务已完成？')) return; axios.post(`http://192.168.54.183:3000/api/quests/${id}/complete`).then(()=>{ setReviewTarget({questId:id, toEmail:providerEmail}); loadAllData() }) } 
-        else { axios.post(`http://192.168.54.183:3000/api/quests/${id}/${action}`).then(()=>{ loadAllData() }) }
+        if(action==='complete') { if(!confirm('确认任务已完成？')) return; axios.post(`https://campus-quest-api.onrender.com/api/quests/${id}/complete`).then(()=>{ setReviewTarget({questId:id, toEmail:providerEmail}); loadAllData() }) } 
+        else { axios.post(`https://campus-quest-api.onrender.com/api/quests/${id}/${action}`).then(()=>{ loadAllData() }) }
     }
 
     // 提交评价
@@ -376,7 +376,7 @@ const handleImageUpload = async (e) => {
             return alert("❌ 错误：无法确定评价对象，请刷新页面重试。");
         }
         try {
-            await axios.post(`http://192.168.54.183:3000/api/quests/${reviewTarget.questId}/review`, {
+            await axios.post(`https://campus-quest-api.onrender.com/api/quests/${reviewTarget.questId}/review`, {
                 from_email: session.user.email,
                 to_email: reviewTarget.toEmail,
                 rating: reviewForm.rating,
