@@ -123,6 +123,7 @@ function QuestItem({ q, session, onCancel, onStatusUpdate, onDrop, onReview }) {
 
 // --- 主组件 ---
 function App() {
+    const [expandedIds, setExpandedIds] = useState([]); // 补上这一行
     // client/src/App.jsx - 在 App 组件内部
 const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认展开 (true)
     // 状态定义
