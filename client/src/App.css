@@ -1,0 +1,631 @@
+/* client/src/App.css */
+:root {
+  --primary-color: #ffda44; /* 闲鱼黄 */
+  --primary-hover: #ffc107;
+  --text-main: #333;
+  --text-secondary: #666;
+  --bg-color: #f6f7f9; /* 柔和灰背景 */
+  --card-bg: #ffffff;
+  --border-radius: 16px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+  --shadow-hover: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+/* --- 头部 --- */
+.page-header {
+  background: var(--card-bg);
+  padding: 15px 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky; /* 顶部吸附 */
+  top: 20px;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.user-panel {
+  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.coin-badge {
+  background: #fff8e1;
+  color: #f39c12;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.btn-logout {
+  background: #f1f3f5;
+  color: #666;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-logout:hover { background: #e9ecef; color: #333; }
+
+/* --- 卡片通用 --- */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 25px;
+  border: 1px solid rgba(0,0,0,0.02);
+  transition: transform 0.2s;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- 表单控件 --- */
+.form-control {
+  background: #f8f9fa;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  margin-bottom: 0; /* 由 flex gap 控制 */
+}
+
+.form-control:focus {
+  background: #fff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(255, 218, 68, 0.2);
+  outline: none;
+}
+
+textarea.form-control { resize: vertical; min-height: 100px; }
+
+/* --- 按钮 --- */
+.btn-submit {
+  background: var(--primary-color);
+  color: #333;
+  font-weight: 700;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+}
+.btn-submit:active { transform: scale(0.98); }
+.btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* --- Tab 筛选器 --- */
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.tab-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab-btn.active {
+  background: var(--primary-color);
+  color: #333;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(255, 218, 68, 0.3);
+}
+
+.tab-btn.inactive {
+  background: #f1f3f5;
+  color: #666;
+}
+.tab-btn.inactive:hover { background: #e9ecef; }
+
+/* --- 瀑布流卡片 (Hover Card) --- */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.hover-card {
+  border: none !important;
+  border-radius: var(--border-radius) !important;
+  overflow: hidden;
+  background: #fff;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.hover-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-img-wrapper {
+  height: 160px;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.card-content {
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.price-tag {
+  color: #ff5000; /* 淘宝红/闲鱼红 */
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.want-btn {
+  background: linear-gradient(135deg, #ffda44 0%, #ffc107 100%);
+  color: #333;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* --- 上传区域 --- */
+.upload-area {
+  border: 2px dashed #e9ecef;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  background: #fcfcfc;
+}
+.upload-area:hover { border-color: var(--primary-color); background: #fffdf5; }
+
+/* --- 消息列表 --- */
+.msg-item {
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #f1f1f1;
+  transition: background 0.2s;
+}
+.msg-item:last-child { border-bottom: none; }
+.msg-item:hover { background: #fcfcfc; }
+
+.badge-tag {
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #eee;
+  color: #666;
+  margin-right: 5px;
+}
+/* client/src/App.css */
+
+/* ... 保持之前的代码不变 ... */
+
+/* 新增：漂亮的图片占位符 */
+.img-placeholder {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #fff7e6 0%, #fff1b8 100%); /* 柔和的黄色渐变 */
+  color: #ffda44;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0; /* 防止被挤压 */
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+/* 列表大图的占位符 */
+.card-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ddd;
+}
+.card-img-placeholder span {
+    font-size: 3rem;
+    margin-bottom: 5px;
+}
+/* --- 新增：搜索与筛选栏样式 --- */
+.search-filter-bar {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap; /* 手机上自动换行 */
+}
+
+/* 搜索框组 */
+.search-input-group {
+  flex: 1; /* 占满剩余空间 */
+  background: #f1f3f5;
+  border-radius: 25px; /* 圆角胶囊 */
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+  min-width: 200px;
+}
+
+/* 搜索框聚焦时变白 */
+.search-input-group:focus-within {
+  background: #fff;
+  box-shadow: 0 0 0 2px #ffda44; /* 闲鱼黄边框 */
+}
+
+.search-input-group input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 0.95rem;
+  outline: none;
+  color: #333;
+}
+
+.search-input-group button {
+  background: #ffda44;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+/* 筛选下拉框组 */
+.filter-selects {
+  display: flex;
+  gap: 10px;
+}
+
+.mini-select {
+  padding: 8px 12px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 0.85rem;
+  color: #555;
+  cursor: pointer;
+  outline: none;
+}
+
+.mini-select:hover {
+  background: #fafafa;
+  border-color: #ddd;
+}
+/* --- 新增：详情描述样式 --- */
+.card-desc {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+  /* 核心代码：限制显示2行，多余显示省略号 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+  height: 2.8em; /* 稍微留点高度占位 */
+}
+
+/* --- 新增：全屏看图弹窗 --- */
+.image-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.9); /* 深黑色背景 */
+  z-index: 2000; /* 保证在最上层 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease;
+}
+
+.image-modal img {
+  max-width: 90vw;  /* 最大宽度90%视窗 */
+  max-height: 90vh; /* 最大高度90%视窗 */
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  cursor: default;
+}
+
+.image-modal .close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image-modal .close-btn:hover {
+  background: rgba(255,255,255,0.4);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+/* --- 裁剪弹窗样式 --- */
+.cropper-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #333;
+  z-index: 3000; /* 保证在最最上层 */
+  display: flex;
+  flex-direction: column;
+}
+
+.cropper-container {
+  position: relative;
+  flex: 1; /* 占据大部分空间 */
+  background: #000;
+}
+
+.cropper-controls {
+  height: 120px;
+  background: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+/* =========================================
+   📱 移动端适配 V4 (暴力拆迁版 - 解决挤压)
+   放到 App.css 最底部，完全替换之前的 @media 代码
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  /* --- 1. 顶部大标题栏 (Header) --- */
+  header {
+    flex-direction: column !important; /* 强制上下排列 */
+    height: auto !important;
+    padding: 15px !important;
+    gap: 10px !important;
+  }
+
+  /* 修复“校园集市”变竖排的问题 */
+  header > div:first-child {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important; /* 居中显示 */
+    white-space: nowrap !important;     /* 禁止文字换行 */
+  }
+
+  /* 用户头像区域 */
+  header .user-panel, header > div:last-child {
+    width: 100% !important;
+    justify-content: center !important; /* 居中 */
+    background: #f5f5f5; /* 加个灰色背景区分 */
+    padding: 8px;
+    border-radius: 8px;
+    margin-left: 0 !important;
+  }
+
+  /* --- 2. 整体容器 --- */
+  .container {
+    flex-direction: column !important;
+    height: auto !important;
+    overflow-x: hidden !important;
+  }
+
+  /* --- 3. 侧边栏 (变成了顶部面板) --- */
+  .sidebar {
+    width: 100% !important;
+    border-right: none !important;
+    border-bottom: 5px solid #eee !important;
+    padding: 15px !important;
+    order: -1; 
+  }
+  
+  /* 侧边栏里的输入框统统 100% 宽 */
+  .sidebar input, .sidebar select, .sidebar textarea, .sidebar button {
+    width: 100% !important;
+    margin-bottom: 10px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* --- 4. 搜索区 (重点修复对象) --- */
+  .main-content {
+    width: 100% !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 4.1 强制“搜索框”所在的父容器变成竖排 */
+  /* 这里我们用通配符，不管它原来是 flex 还是 grid，统统改掉 */
+  .main-content > div {
+    display: flex !important;
+    flex-direction: column !important; /* 关键！让内部元素竖着排 */
+    align-items: flex-start !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+
+  /* 4.2 特殊处理：顶部的校区 Tab (全校/城北...) */
+  /* 我们需要它横向排列且可滑动 */
+  .main-content > div:first-child {
+    flex-direction: column !important; 
+  }
+  
+  /* 找到那个放按钮的容器 (假设是里面那个 flex 容器) */
+  .main-content > div:first-child > div {
+    flex-direction: row !important; /* Tab 还是要横着 */
+    width: 100% !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    padding-bottom: 5px;
+    justify-content: flex-start !important;
+  }
+
+  /* 4.3 搜索框 & 按钮 & 筛选器 */
+  /* 让所有输入框、按钮、下拉菜单都独占一行，撑满屏幕 */
+  .main-content input[type="text"], 
+  .main-content button, 
+  .main-content select {
+    width: 100% !important;       /* 霸道撑满 */
+    max-width: 100% !important;
+    margin: 0 0 10px 0 !important; /* 底部留空隙 */
+    height: 42px !important;      /* 统一高度，方便点击 */
+    box-sizing: border-box !important;
+  }
+
+  /* 搜索按钮 */
+  .main-content button {
+    background-color: #ffd666 !important; /* 醒目黄 */
+    border-radius: 20px !important;
+    font-weight: bold;
+  }
+
+  /* “只看收藏” 复选框容器 */
+  .main-content label {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #fff0f6 !important;
+    padding: 10px !important;
+    border-radius: 8px !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .main-content label input {
+    width: auto !important; /* 复选框本身不要撑满 */
+    margin-right: 5px !important;
+  }
+
+  /* --- 5. 任务卡片 --- */
+  .grid-container {
+    display: grid !important;
+    grid-template-columns: 1fr !important; /* 单列 */
+    gap: 20px !important;
+    padding: 0 0 80px 0 !important;
+  }
+  
+  .card-img-wrapper {
+    height: 200px !important;
+  }
+}
+/* =========================================
+   🩹 补丁：修复地点选项卡被拉伸的问题
+   请放在 App.css 的最底部
+   ========================================= */
+@media (max-width: 768px) {
+  /* 专门针对 .tab-btn (地点按钮) 进行“松绑” */
+  .main-content .tab-btn {
+    width: auto !important;       /* 恢复自动宽度，不要撑满 */
+    min-width: auto !important;
+    margin-bottom: 0 !important;  /* 去掉多余间距 */
+    padding: 6px 16px !important; /* 保持胶囊形状 */
+    border-radius: 20px !important;
+    flex-shrink: 0 !important;    /* 禁止被挤扁 */
+  }
+  
+  /* 确保它们的父容器靠左排列 */
+  .filter-tabs {
+    width: 100% !important;
+    justify-content: flex-start !important; 
+    gap: 10px !important;
+  }
+}
+/* =========================================
+   🩹 补丁2：修复搜索按钮挡住输入框的问题
+   请放在 App.css 的最底部 (在所有代码之后)
+   ========================================= */
+@media (max-width: 768px) {
+  /* 找到搜索组里的按钮，取消 100% 宽度 */
+  .search-input-group button {
+    width: auto !important;       /* 恢复自动宽度 */
+    margin-bottom: 0 !important;  /* 去掉底部间距 */
+    flex-grow: 0 !important;      /* 禁止自动变大 */
+    padding: 6px 16px !important; /* 保持内边距 */
+  }
+  
+  /* 同时确保输入框能占满剩下的空间 */
+  .search-input-group input {
+    width: 100% !important;       /* 输入框占满剩余空间 */
+    margin-bottom: 0 !important;  /* 去掉底部间距 */
+  }
+}
