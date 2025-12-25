@@ -7,6 +7,7 @@ import Cropper from 'react-easy-crop'
 import { getCroppedImg } from './cropUtils'
 import toast, { Toaster } from 'react-hot-toast';
 import { compressImage } from './compress'; // 🔥 引入压缩工具
+import FeedbackWidget from './components/FeedbackWidget';
 
 // --- 工具函数 ---
 const timeAgo = (dateString) => {
@@ -779,6 +780,7 @@ const handleImageUpload = async (e) => {
                     </div>
                 </div>
             )}
+            <FeedbackWidget />
         </div>
     )
 }
