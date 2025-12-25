@@ -4,7 +4,12 @@ const db = require('./db');
 const app = express();
 
 app.use(cors({
-    origin: 'https://www.campus-quest.top/',  // 🔥 允许任何 IP (手机、电脑、平板) 访问
+    origin: [
+    'http://localhost:5173',               // 允许本地开发
+    'https://www.campus-quest.top',        // 允许带 www 的新域名 (主要)
+    'https://campus-quest.top',            // 允许不带 www 的新域名 (备用)
+    'https://campus-quest-nu.vercel.app'   // (可选) 允许 Vercel 的原生域名
+  ],
     credentials: true
 }));
 app.use(express.json());
