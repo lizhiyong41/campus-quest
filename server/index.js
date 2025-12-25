@@ -263,6 +263,10 @@ app.post('/api/favorites/toggle', async (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+  res.send('Server is running!'); 
+});
+
 // --- 其他接口保持不变 ---
 app.post('/api/quests/:id/accept', async (req, res) => { const {id}=req.params; const {email}=req.body; const r=await db.query(`UPDATE quests SET status='LOCKED', provider_email=$1 WHERE id=$2 RETURNING *`,[email,id]); res.json(r.rows[0]); });
 app.post('/api/quests/:id/drop', async (req, res) => { const {id}=req.params; const r=await db.query(`UPDATE quests SET status='OPEN', provider_email=NULL WHERE id=$1 RETURNING *`,[id]); res.json(r.rows[0]); });
