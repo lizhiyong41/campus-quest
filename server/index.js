@@ -4,7 +4,7 @@ const db = require('./db');
 const app = express();
 
 app.use(cors({
-    origin: '*',  // 🔥 允许任何 IP (手机、电脑、平板) 访问
+    origin: 'https://www.campus-quest.top/',  // 🔥 允许任何 IP (手机、电脑、平板) 访问
     credentials: true
 }));
 app.use(express.json());
