@@ -8,6 +8,7 @@ import { getCroppedImg } from './cropUtils'
 import toast, { Toaster } from 'react-hot-toast';
 import { compressImage } from './compress'; // 🔥 引入压缩工具
 import FeedbackWidget from './components/FeedbackWidget';
+import SharePoster from './components/SharePoster';
 
 // --- 工具函数 ---
 const timeAgo = (dateString) => {
@@ -147,6 +148,7 @@ const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认�
     
     // 评价与弹窗状态
     const [reviewTarget, setReviewTarget] = useState(null); 
+    const [showPoster, setShowPoster] = useState(false);
     const [reviewForm, setReviewForm] = useState({ rating: 5, comment: '' });
     const [previewImage, setPreviewImage] = useState(null)
     
@@ -431,6 +433,25 @@ const handleImageUpload = async (e) => {
                     <span style={{fontSize: '2rem'}}>🏫</span>
                     <h1>校园集市</h1>
                 </div>
+                <button 
+                   onClick={() => setShowPoster(true)}
+                   style={{
+                       marginLeft: 'auto', 
+                       marginRight: '15px', 
+                       border:'none', 
+                       background:'#e6f7ff', // 淡蓝色背景
+                       color: '#1890ff',     // 蓝色文字
+                       padding:'8px 15px', 
+                       borderRadius:'20px', 
+                       cursor:'pointer', 
+                       fontWeight: 'bold',
+                       display: 'flex',
+                       alignItems: 'center',
+                       gap: '5px'
+                   }}
+                >
+                   📤 分享集市
+                </button>
                 <div className="user-panel">
                     <div style={{display:'flex', alignItems:'center', gap:'12px'}}>
                         {/* 头像 */}
@@ -780,6 +801,7 @@ const handleImageUpload = async (e) => {
                     </div>
                 </div>
             )}
+            {showPoster && <SharePoster onClose={() => setShowPoster(false)} />}
             <FeedbackWidget />
         </div>
     )
