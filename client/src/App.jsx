@@ -9,6 +9,8 @@ import toast, { Toaster } from 'react-hot-toast';
 import { compressImage } from './compress'; // 🔥 引入压缩工具
 import FeedbackWidget from './components/FeedbackWidget';
 import SharePoster from './components/SharePoster';
+import Admin from './Admin';
+import { Routes, Route } from 'react-router-dom';
 
 // --- 工具函数 ---
 const timeAgo = (dateString) => {
@@ -125,7 +127,7 @@ function QuestItem({ q, session, onCancel, onStatusUpdate, onDrop, onReview }) {
 }
 
 // --- 主组件 ---
-function App() {
+function Marketplace() {
     const [expandedIds, setExpandedIds] = useState([]); // 补上这一行
     // client/src/App.jsx - 在 App 组件内部
 const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认展开 (true)
@@ -178,11 +180,14 @@ const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认�
         'COMPLETED': '已完成'
     }
 
-    // 初始化 Session
     useEffect(() => {
+
         supabase.auth.getSession().then(({ data: { session } }) => setSession(session))
+
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => setSession(session))
+
         return () => subscription.unsubscribe()
+
     }, [])
 
     // 加载数据
@@ -806,6 +811,18 @@ const handleImageUpload = async (e) => {
             <FeedbackWidget />
         </div>
     )
+}
+
+function App() {
+  return (
+    <Routes>
+      {/* 🏠 主页路径：显示原来的集市界面 */}
+      <Route path="/" element={<Marketplace />} />
+      
+      {/* 👮‍♂️ 管理员路径：显示管理员后台 */}
+      <Route path="/admin" element={<Admin />} />
+    </Routes>
+  )
 }
 
 export default App
