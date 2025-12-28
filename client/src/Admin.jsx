@@ -14,7 +14,7 @@ function Admin() {
     const ADMIN_PIN = "8888"; 
     
     // 获取 API 地址
-    const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:3000";
+    const API_BASE = import.meta.env.VITE_API_URL || "https://campus-quest-api.onrender.com";
 
     useEffect(() => {
         // 1. 验证身份 (第一道门：必须是站长账号)
