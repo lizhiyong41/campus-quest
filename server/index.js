@@ -32,12 +32,7 @@ Sentry.init({
 
 // --- 原有的中间件 ---
 app.use(cors({
-    origin: [
-    'http://localhost:5173',           
-    'https://www.campus-quest.top',    
-    'https://campus-quest.top',        
-    'https://campus-quest-nu.vercel.app' 
-  ],
+    origin: '*',
     credentials: true
 }));
 

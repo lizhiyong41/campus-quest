@@ -1,0 +1,5 @@
+{
+  "appId": "com.campus_quest.app",
+  "appName": "campus-quest",
+  "webDir": "client/dist"
+}
