@@ -52,53 +52,38 @@ const DownloadPage = () => {
 
 // 简单的内联样式，确保手机上好看
 const styles = {
-  container: {
-    minHeight: '100vh',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '20px',
-    fontFamily: 'sans-serif',
-  },
+  // ... 其他样式保持不变 ...
   card: {
     background: 'white',
     padding: '40px 30px',
     borderRadius: '20px',
-    boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
-    textAlign: 'center',
+    // 确保这里是 center，它会管辖里面所有的文本
+    textAlign: 'center', 
     maxWidth: '400px',
     width: '100%',
+    // 【新增】让卡片本身在页面里也是居中的
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
-  title: { margin: '0 0 10px 0', color: '#333' },
-  subtitle: { margin: '0 0 30px 0', color: '#666' },
-  iconPlaceholder: { fontSize: '60px', marginBottom: '20px' },
-  features: { textAlign: 'left', background: '#f5f7fa', padding: '15px', borderRadius: '10px', marginBottom: '25px', lineHeight: '1.8' },
-  downloadBtn: {
-    display: 'block',
-    width: '100%',
-    padding: '15px',
-    background: '#00d2ff',
-    color: 'white',
-    textDecoration: 'none',
-    borderRadius: '10px',
-    fontWeight: 'bold',
-    boxShadow: '0 4px 15px rgba(0,210,255,0.4)',
-    marginBottom: '10px',
+  // ...
+  features: { 
+    // 【修改这里】把原来的 textAlign: 'left' 去掉，或者改成 center
+    textAlign: 'center', // <-- 改成 center
+    background: '#f5f7fa', 
+    padding: '15px', 
+    borderRadius: '10px', 
+    marginBottom: '25px', 
+    lineHeight: '1.8' 
+    // 【提示】如果觉得居中的对勾列表不好看，可以把这行 textAlign 删掉，
+    // 然后给 features 加上: display: 'inline-block', textAlign: 'left'
   },
-  webBtn: {
-    width: '100%',
-    padding: '12px',
-    background: 'transparent',
-    border: '2px solid #764ba2',
-    color: '#764ba2',
-    borderRadius: '10px',
-    marginTop: '10px',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-  },
-  tip: { fontSize: '12px', color: '#999', marginTop: '5px' },
-  iosGuide: { textAlign: 'left', color: '#444' }
+  // ...
+  iosGuide: { 
+    // 【修改这里】把原来的 textAlign: 'left' 去掉，或者改成 center
+    textAlign: 'center', // <-- 改成 center
+    color: '#444',
+    marginTop: '30px' // 加一点上边距，这块和上面隔开点更好看
+  }
 };
 
 export default DownloadPage;

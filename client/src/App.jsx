@@ -12,6 +12,7 @@ import SharePoster from './components/SharePoster';
 import Admin from './Admin';
 import { Routes, Route } from 'react-router-dom';
 import DownloadPage from './DownloadPage';
+import { Capacitor } from '@capacitor/core';
 
 // --- 工具函数 ---
 const timeAgo = (dateString) => {
@@ -132,6 +133,14 @@ function Marketplace() {
     const [expandedIds, setExpandedIds] = useState([]); // 补上这一行
     // client/src/App.jsx - 在 App 组件内部
 const [isMsgSectionOpen, setIsMsgSectionOpen] = useState(true); // 🔥 默认展开 (true)
+// 🔥🔥🔥 新增：判断是否为原生 APP 的状态 🔥🔥🔥
+    const [isNativeApp, setIsNativeApp] = useState(false);
+
+    useEffect(() => {
+        // 🔥🔥🔥 新增：页面加载时判断当前环境 🔥🔥🔥
+        // Capacitor.isNativePlatform() 如果是在安卓/iOS里跑，返回 true；否则返回 false
+        setIsNativeApp(Capacitor.isNativePlatform());
+    }, []);
     // 状态定义
     const [session, setSession] = useState(null)
     const [profile, setProfile] = useState({ nickname: '...' })
@@ -609,6 +618,37 @@ const handleImageUpload = async (e) => {
             </div>
         )}
     </section>
+
+    {/* 🔥🔥🔥 新增：条件渲染下载按钮 🔥🔥🔥 */}
+    {/* 只有当 isNativeApp 为 false (也就是在浏览器里) 时，才显示这个块 */}
+    {!isNativeApp && (
+        <div style={{ marginTop: '20px', textAlign: 'center' }}>
+            <a
+                // 🔴 请务必替换成你自己的 GitHub APK 下载链接
+                href="https://github.com/lizhiyong41/campus-quest/releases/download/v1.0.0/CampusQuest.apk"
+                style={{
+                    display: 'block',
+                    width: '100%',
+                    padding: '12px',
+                    backgroundColor: '#00d2ff', // 醒目的蓝色
+                    color: 'white',
+                    textAlign: 'center',
+                    borderRadius: '10px',
+                    textDecoration: 'none',
+                    fontWeight: 'bold',
+                    boxShadow: '0 4px 10px rgba(0, 210, 255, 0.3)',
+                    transition: 'all 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+                onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+            >
+                📱 下载安卓 APP，体验更佳！
+            </a>
+            <p style={{ color: '#999', fontSize: '12px', marginTop: '8px' }}>
+                (iOS 用户请继续使用网页版，可添加到主屏幕)
+            </p>
+        </div>
+    )}
 
 </div>
 
