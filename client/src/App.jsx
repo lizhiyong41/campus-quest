@@ -622,33 +622,31 @@ const handleImageUpload = async (e) => {
     {/* 🔥🔥🔥 新增：条件渲染下载按钮 🔥🔥🔥 */}
     {/* 只有当 isNativeApp 为 false (也就是在浏览器里) 时，才显示这个块 */}
     {!isNativeApp && (
-        <div style={{ marginTop: '20px', textAlign: 'center' }}>
-            <a
-                // 🔴 请务必替换成你自己的 GitHub APK 下载链接
-                href="https://github.com/lizhiyong41/campus-quest/releases/download/v1.0.0/CampusQuest.apk"
-                style={{
-                    display: 'block',
-                    width: '100%',
-                    padding: '12px',
-                    backgroundColor: '#00d2ff', // 醒目的蓝色
-                    color: 'white',
-                    textAlign: 'center',
-                    borderRadius: '10px',
-                    textDecoration: 'none',
-                    fontWeight: 'bold',
-                    boxShadow: '0 4px 10px rgba(0, 210, 255, 0.3)',
-                    transition: 'all 0.2s'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-            >
-                📱 下载安卓 APP，体验更佳！
-            </a>
-            <p style={{ color: '#999', fontSize: '12px', marginTop: '8px' }}>
-                (iOS 用户请继续使用网页版，可添加到主屏幕)
-            </p>
-        </div>
-    )}
+    <div className="card" style={{ marginTop: '20px', textAlign: 'center', padding: '20px' }}>
+        {/* 把按钮限制一下最大宽度，看起来更精致 */}
+        <a 
+            href="https://github.com/lizhiyong41/campus-quest/releases/download/v1.0.0/app-release.apk" // 👈 记得换成新链接！
+            style={{
+                display: 'block',
+                maxWidth: '280px',   // 限制最大宽度
+                margin: '0 auto',    // 居中核心代码
+                padding: '12px 20px',
+                backgroundColor: '#00d2ff',
+                color: 'white',
+                borderRadius: '50px', // 改成圆角胶囊形状，更好看
+                textDecoration: 'none',
+                fontWeight: 'bold',
+                boxShadow: '0 4px 10px rgba(0, 210, 255, 0.3)',
+                fontSize: '0.95rem'
+            }}
+        >
+            📲 下载安卓 APP，体验更佳！
+        </a>
+        <p style={{ color: '#999', fontSize: '12px', marginTop: '10px', marginBottom: 0 }}>
+            (iOS 用户请继续使用网页版，可添加到主屏幕)
+        </p>
+    </div>
+)}
 
 </div>
 
