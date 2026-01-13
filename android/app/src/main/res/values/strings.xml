@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">campus-quest</string>
-    <string name="title_activity_main">campus-quest</string>
+    <string name="app_name">校园集市</string>
+    <string name="title_activity_main">校园集市</string>
     <string name="package_name">com.campus_quest.app</string>
     <string name="custom_url_scheme">com.campus_quest.app</string>
 </resources>

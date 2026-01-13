@@ -49,23 +49,30 @@ const FeedbackWidget = () => {
       {/* 1. 悬浮按钮 (平时显示的那个图标) */}
       {!isOpen && (
         <button
-          onClick={() => setIsOpen(true)}
-          style={{
-            backgroundColor: '#3b82f6', // 蓝色背景
-            color: 'white',
-            border: 'none',
-            borderRadius: '50px',
-            padding: '12px 20px',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-            cursor: 'pointer',
-            fontWeight: 'bold',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px'
-          }}
-        >
-          <span>📩</span> 提意见
-        </button>
+  onClick={() => setIsOpen(true)}
+  style={{
+    // ---👇 核心修改位置开始 👇---
+    position: 'fixed',           // 1. 让它悬浮在屏幕上
+    right: '20px',               // 2. 靠右距离
+    bottom: '100px',             // 3. 靠底距离 (设置 100px 足够高，避开黑条和底部菜单)
+    zIndex: 9999,                // 4. 确保层级最高，不被其他内容盖住
+    // ---👆 核心修改位置结束 👆---
+
+    backgroundColor: '#3b82f6', 
+    color: 'white',
+    border: 'none',
+    borderRadius: '50px',
+    padding: '12px 20px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.3)', // 稍微加深一点阴影，更有悬浮感
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px'
+  }}
+>
+  <span>📩</span> 提意见
+</button>
       )}
 
       {/* 2. 弹出的输入框表单 */}

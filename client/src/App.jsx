@@ -11,6 +11,7 @@ import FeedbackWidget from './components/FeedbackWidget';
 import SharePoster from './components/SharePoster';
 import Admin from './Admin';
 import { Routes, Route } from 'react-router-dom';
+import DownloadPage from './DownloadPage';
 
 // --- 工具函数 ---
 const timeAgo = (dateString) => {
@@ -821,6 +822,7 @@ function App() {
       
       {/* 👮‍♂️ 管理员路径：显示管理员后台 */}
       <Route path="/admin" element={<Admin />} />
+      <Route path="/download" element={<DownloadPage />} />
     </Routes>
   )
 }
